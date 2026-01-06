@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">PacketWorldApp</string>
+    <string-array name="opciones_estatus_envio">
+        <item>En Tránsito</item>
+        <item>Detenido</item>
+        <item>Entregado</item>
+        <item>Cancelado</item>
+    </string-array>
 </resources>
