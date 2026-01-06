@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.packetworldapp.databinding.ActivityPerfilBinding
 import com.example.packetworldapp.dominio.ColaboradorImp
 import com.example.packetworldapp.poko.Conductor
+import com.example.packetworldapp.util.Validaciones
 import com.google.gson.Gson
 import java.io.ByteArrayOutputStream
 
@@ -156,15 +157,72 @@ class PerfilActivity : AppCompatActivity() {
 
     private fun validarCamposGenerales(): Boolean {
         var esValido = true
-        if (binding.etNombre.text.isNullOrEmpty()) { binding.etNombre.error = "Campo requerido"; esValido = false }
-        if (binding.etPaterno.text.isNullOrEmpty()) { binding.etPaterno.error = "Campo requerido"; esValido = false }
-        if (binding.etCorreo.text.isNullOrEmpty()) { binding.etCorreo.error = "Campo requerido"; esValido = false }
-        if (binding.etLicencia.text.isNullOrEmpty()) { binding.etLicencia.error = "Campo requerido"; esValido = false }
+
+        val nombre = binding.etNombre.text.toString()
+        if (Validaciones.esVacio(nombre)) {
+            binding.etNombre.error = "Campo requerido"
+            esValido = false
+        } else if (!Validaciones.esSoloLetras(nombre)) {
+            binding.etNombre.error = "Solo se permiten letras"
+            esValido = false
+        }
+
+        val paterno = binding.etPaterno.text.toString()
+        if (Validaciones.esVacio(paterno)) {
+            binding.etPaterno.error = "Campo requerido"
+            esValido = false
+        } else if (!Validaciones.esSoloLetras(paterno)) {
+            binding.etPaterno.error = "Solo se permiten letras"
+            esValido = false
+        }
+
+        val materno = binding.etMaterno.text.toString()
+        if (!Validaciones.esVacio(materno) && !Validaciones.esSoloLetras(materno)) {
+            binding.etMaterno.error = "Solo se permiten letras"
+            esValido = false
+        }
+
+        val correo = binding.etCorreo.text.toString().trim()
+        if (Validaciones.esVacio(correo)) {
+            binding.etCorreo.error = "Campo requerido"
+            esValido = false
+        } else if (!Validaciones.esCorreoValido(correo)) {
+            binding.etCorreo.error = "Correo inválido"
+            esValido = false
+        }
+
+        val curp = binding.etCurp.text.toString().trim().uppercase()
+        if (Validaciones.esVacio(curp)) {
+            binding.etCurp.error = "Campo requerido"
+            esValido = false
+        } else if (!Validaciones.esCurpValida(curp)) {
+            binding.etCurp.error = "Debe tener 18 caracteres alfanuméricos"
+            esValido = false
+        }
+
+        val licencia = binding.etLicencia.text.toString().trim().uppercase()
+        if (Validaciones.esVacio(licencia)) {
+            binding.etLicencia.error = "Campo requerido"
+            esValido = false
+        } else if (!Validaciones.esLicenciaValida(licencia)) {
+            binding.etLicencia.error = "Formato inválido (Min 5 caracteres)"
+            esValido = false
+        }
+
         return esValido
     }
 
     private fun guardarCambios() {
         binding.btnGuardarCambios.isEnabled = false
+
+        binding.etCurp.setText(Validaciones.limpiarTextoMayusculas(binding.etCurp.text.toString()))
+        binding.etLicencia.setText(Validaciones.limpiarTextoMayusculas(binding.etLicencia.text.toString()))
+
+        binding.etCorreo.setText(binding.etCorreo.text.toString().trim().lowercase())
+
+        binding.etNombre.setText(binding.etNombre.text.toString().trim())
+        binding.etPaterno.setText(binding.etPaterno.text.toString().trim())
+
         if (fotoPerfilBytes != null) {
             ColaboradorImp.subirFotoPerfil(this, conductor!!.idColaborador, fotoPerfilBytes!!) { exito, mensaje ->
                 if (exito) {

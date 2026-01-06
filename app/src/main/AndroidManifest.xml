@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PacketWorldApp">
         <activity
+            android:name=".CambiarPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PerfilActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetalleEnvioActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
