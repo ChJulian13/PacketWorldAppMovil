@@ -113,6 +113,7 @@ class PerfilActivity : AppCompatActivity() {
             binding.etPaterno.setText(it.apellidoPaterno)
             binding.etMaterno.setText(it.apellidoMaterno)
             binding.etNoPersonal.setText(it.noPersonal)
+            binding.etSucursal.setText(it.sucursal)
             binding.etCorreo.setText(it.correo)
             binding.etCurp.setText(it.curp)
             binding.etLicencia.setText(it.numeroLicencia)
@@ -132,6 +133,7 @@ class PerfilActivity : AppCompatActivity() {
 
         binding.ivFotoPerfil.alpha = if(bloquear) 0.7f else 1.0f
         binding.etNoPersonal.isEnabled = false
+        binding.etSucursal.isEnabled = false
     }
 
     private fun configurarBotones() {

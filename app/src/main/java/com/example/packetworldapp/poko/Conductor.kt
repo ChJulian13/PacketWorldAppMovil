@@ -11,5 +11,6 @@ data class Conductor(
     val fotoBase64: String?,
     val idRol: Int,
     val idSucursal: Int,
+    val sucursal: String,
     val numeroLicencia: String,
 )

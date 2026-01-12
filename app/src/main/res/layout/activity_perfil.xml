@@ -88,6 +88,21 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Sucursal (No editable)"
+            android:layout_marginBottom="12dp"
+            app:boxBackgroundColor="?attr/colorSurfaceVariant">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etSucursal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:inputType="none"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:hint="Correo Electrónico"
             android:layout_marginBottom="12dp">
             <com.google.android.material.textfield.TextInputEditText
