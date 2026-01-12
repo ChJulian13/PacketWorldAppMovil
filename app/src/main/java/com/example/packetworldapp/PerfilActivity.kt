@@ -269,7 +269,10 @@ class PerfilActivity : AppCompatActivity() {
                 binding.btnGuardarCambios.visibility = View.GONE
                 fotoPerfilBytes = null
 
-                setResult(RESULT_OK)
+                val intentResultado = Intent()
+                val jsonActualizado = Gson().toJson(conductor)
+                intentResultado.putExtra("conductor_actualizado", jsonActualizado)
+                setResult(RESULT_OK, intentResultado)
             }
         }
     }

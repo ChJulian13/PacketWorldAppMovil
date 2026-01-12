@@ -45,7 +45,7 @@ class DetalleEnvioActivity : AppCompatActivity() {
         with(binding) {
             tvGuiaDetalle.text = "Guía: ${envioActual?.noGuia}"
             tvOrigen.text = envioActual?.sucursal
-            tvDestinatario.text = "${envioActual?.destinatarioNombre} ${envioActual?.destinatarioApellidoPaterno}"
+            tvDestinatario.text = "${envioActual?.destinatarioNombre} ${envioActual?.destinatarioApellidoPaterno} ${envioActual?.destinatarioApellidoMaterno}"
             tvDireccion.text = envioActual?.destinatarioDireccion
 
             tvClienteNombre.text = envioActual?.cliente

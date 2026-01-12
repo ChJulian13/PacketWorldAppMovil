@@ -25,7 +25,18 @@ class MainActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == RESULT_OK) {
-            refrescarDatosUsuario()
+            val data = result.data
+            val jsonActualizado = data?.getStringExtra("conductor_actualizado")
+
+            if (jsonActualizado != null) {
+                conductorActual = Gson().fromJson(jsonActualizado, Conductor::class.java)
+                idConductor = conductorActual!!.idColaborador
+
+                binding.tvTitulo.text = "Hola, ${conductorActual!!.nombre}"
+                Toast.makeText(this, "Perfil actualizado correctamente", Toast.LENGTH_SHORT).show()
+            } else {
+                refrescarDatosUsuario()
+            }
         }
     }
 
